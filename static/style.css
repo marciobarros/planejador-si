@@ -50,7 +50,6 @@ body {
     justify-content: space-between; 
     margin-bottom: 0px; 
     padding-bottom: 24px; 
-    border-bottom: 1px solid var(--border); 
 }
 
 #componente-editor-funcionalidades .page-header .page-title { 
@@ -357,6 +356,321 @@ body {
 }
 
 
+/* Editor de grupamentos de dados */
+#componente-editor-grupamentos-dados .page-wrap { margin: 0 auto; padding: 16px 32px; }
+
+#componente-editor-grupamentos-dados .page-header { 
+    display: flex; 
+    align-items: flex-end; 
+    justify-content: space-between; 
+    margin-bottom: 0px; 
+    padding-bottom: 24px; 
+}
+
+#componente-editor-grupamentos-dados .page-header .page-title { 
+    font-family: var(--serif); 
+    font-size: 26px; 
+    font-weight: 400; 
+    letter-spacing: -0.3px; 
+    line-height: 1.2; 
+}
+    
+#componente-editor-grupamentos-dados .page-header .page-subtitle { 
+    font-size: 12px; 
+    color: var(--muted); 
+    margin-top: 4px; 
+}
+
+#componente-editor-grupamentos-dados .btn-base {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: background 0.13s, border-color 0.13s, opacity 0.13s;
+    border: 1px solid transparent;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+#componente-editor-grupamentos-dados .btn-dark {
+    background: var(--text);
+    color: #fff;
+    border-color: var(--text);
+}
+
+#componente-editor-grupamentos-dados .btn-dark:hover { 
+    background: #333; 
+    border-color: #333; 
+}
+
+#componente-editor-grupamentos-dados .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border-color: var(--border-md);
+}
+
+#componente-editor-grupamentos-dados .btn-ghost:hover { 
+    background: var(--accent-bg); 
+    color: var(--text); 
+}
+
+#componente-editor-grupamentos-dados .btn-icon {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    padding: 4px 6px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1;
+    transition: background 0.12s, color 0.12s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+#componente-editor-grupamentos-dados .btn-icon:hover { 
+    background: var(--accent-bg); 
+    color: var(--text); 
+}
+
+#componente-editor-grupamentos-dados .btn-icon.red:hover { 
+    background: var(--red-bg); 
+    color: var(--red); 
+}
+
+#componente-editor-grupamentos-dados .btn-icon.green:hover { 
+    background: var(--green-bg); 
+    color: var(--green); 
+}
+
+#componente-editor-grupamentos-dados .empty-state {
+    text-align: center;
+    padding: 64px 32px;
+    color: var(--muted);
+}
+
+#componente-editor-grupamentos-dados .empty-state .empty-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+    opacity: 0.35;
+}
+
+#componente-editor-grupamentos-dados .empty-state p { font-size: 13px; }
+
+#componente-editor-grupamentos-dados .func-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+#componente-editor-grupamentos-dados .func-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color 0.15s;
+}
+
+#componente-editor-grupamentos-dados .func-card:hover { 
+    border-color: var(--border-md); 
+}
+
+#componente-editor-grupamentos-dados .func-card.open { 
+    border-color: var(--border-md); 
+}
+
+#componente-editor-grupamentos-dados .func-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#componente-editor-grupamentos-dados .func-toggle {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--muted);
+    transition: transform 0.2s;
+    display: flex; align-items: center; justify-content: center;
+}
+
+#componente-editor-grupamentos-dados .func-card.open .func-toggle { 
+    transform: rotate(90deg); 
+}
+
+#componente-editor-grupamentos-dados .grupo-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    font-family: var(--serif);
+}
+
+#componente-editor-grupamentos-dados .func-count {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin-right: 4px;
+}
+
+#componente-editor-grupamentos-dados .func-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+#componente-editor-grupamentos-dados .func-header:hover .func-actions { 
+    opacity: 1; 
+}
+
+#componente-editor-grupamentos-dados .func-body {
+    display: none;
+    border-top: 1px solid var(--border);
+}
+
+#componente-editor-grupamentos-dados .func-card.open .func-body { 
+    display: block; 
+}
+
+#componente-editor-grupamentos-dados .trans-list {
+    padding: 8px 12px;
+}
+
+#componente-editor-grupamentos-dados .trans-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px 6px 36px;
+}
+
+#componente-editor-grupamentos-dados .trans-item:hover { 
+    background: var(--bg); 
+}
+
+#componente-editor-grupamentos-dados .trans-order {
+    font-size: 11px;
+    color: var(--muted);
+    width: 18px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+#componente-editor-grupamentos-dados .trans-name {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text);
+}
+
+#componente-editor-grupamentos-dados .trans-actions {
+    display: flex;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.13s;
+}
+
+#componente-editor-grupamentos-dados .trans-item:hover .trans-actions { 
+    opacity: 1; 
+}
+
+#componente-editor-grupamentos-dados .trans-add-row {
+    padding: 8px 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#componente-editor-grupamentos-dados .inline-input {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid var(--border-md);
+    background: transparent;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    padding: 2px 4px;
+}
+
+#componente-editor-grupamentos-dados .inline-input:focus { 
+    border-bottom-color: var(--text); 
+}
+
+#componente-editor-grupamentos-dados .func-name-input {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid var(--border-md);
+    background: transparent;
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    outline: none;
+    padding: 2px 4px;
+}
+
+#componente-editor-grupamentos-dados .func-name-input:focus { 
+    border-bottom-color: var(--text); 
+}
+
+#componente-editor-grupamentos-dados .add-func-form {
+    background: var(--surface);
+    border: 1px dashed var(--border-md);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    display: none;
+}
+
+#componente-editor-grupamentos-dados .add-func-form.visible { 
+    display: block; 
+}
+
+#componente-editor-grupamentos-dados .add-func-form input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--border-md);
+    background: transparent;
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    padding: 4px 2px;
+    margin-bottom: 14px;
+}
+
+#componente-editor-grupamentos-dados .add-func-form input:focus { 
+    border-bottom-color: var(--text); 
+}
+
+#componente-editor-grupamentos-dados .add-func-form input::placeholder { 
+    color: var(--muted); 
+    font-style: italic; 
+}
+
+#componente-editor-grupamentos-dados .add-func-actions { 
+    display: flex; 
+    gap: 8px; 
+}
+
+#componente-editor-grupamentos-dados .trans-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0px 0px 0px 36px;
+}
+
+
 
 
 
@@ -386,3 +700,4 @@ body {
 .tabela-resultados td.ativo { font-weight: bold; }
 .tabela-resultados td.retorno-opiniao { border-top: 1px solid black; }
 
+.pl-4 { padding-left: 16px; }

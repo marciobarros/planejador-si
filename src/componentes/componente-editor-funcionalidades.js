@@ -8,7 +8,7 @@ var componenteEditorFuncionalidades = function() {
       <div class="page-header">
         <div>
           <div class="page-title">Funcionalidades</div>
-          <div class="page-subtitle">Gerencie as funcionalidades e suas transações</div>
+          <div class="page-subtitle">Cadastre, altere, remova e consulte as funcionalidades do sistema e suas transações</div>
         </div>
         <button class="btn-base btn-dark" id="btn-nova-func">
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
