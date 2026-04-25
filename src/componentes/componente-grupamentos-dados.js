@@ -94,44 +94,26 @@ var componenteGrupamentosDados = function() {
         resultados.forEach(function(grupo, index) {
             const groupIndex = grupamentos.indexOf(grupo);
             const retsCount = grupo.rets.length;
-            const detsCount = grupo.dets.length;
-
-            const referencias = grupo.dets.map(function(det) {
-            if (det.referenciaId == null) return 'nenhuma';
-            const referenciado = grupamentos.find(function(item) { return item.id === det.referenciaId; });
-            return referenciado ? referenciado.nome : 'grupo removido';
-            }).join(', ') || 'nenhuma';
+            /*const detsCount = grupo.dets.length;*/
+            const detsCount = 0;
 
             const card = $(
             `<div class="card mb-3">
                 <div class="card-body">
-                <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
-                    <div>
-                    <p class="card-title mb-1 grupo-name">${encodeHtml(grupo.nome)} (${encodeHtml(grupo.tipo)}, ${retsCount} RET, ${detsCount} DET)</p>
+                    <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+                        <div>
+                            <p class="card-title mb-1 grupo-name">${encodeHtml(grupo.nome)} (${encodeHtml(grupo.tipo)}, ${retsCount} RET, ${detsCount} DET)</p>
+                        </div>
+                        <div class="text-md-end">
+                            <button class="btn-icon btn-nov-ret-grupo" title="Novo RET" data-index="${index}">+RET</button>
+                            <button class="btn-icon btn-nov-det-grupo" title="Novo DET" data-index="${index}">+DET</button>
+                            <button class="btn-icon btn-subir-grupo" title="Subir" data-index="${index}">${ico.up}</button>
+                            <button class="btn-icon btn-descer-grupo" title="Descer" data-index="${index}">${ico.down}</button>
+                            <button class="btn-icon btn-editar-grupo" title="Editar" data-index="${index}">${ico.edit}</button>
+                            <button class="btn-icon red btn-remover-grupo" title="Remover" data-index="${index}">${ico.trash}</button>
+                        </div>
                     </div>
-                    <div class="text-md-end">
-                    <button class="btn-icon btn-nov-ret-grupo" title="Novo RET" data-index="${index}">+RET</button>
-                    <button class="btn-icon btn-nov-det-grupo" title="Novo DET" data-index="${index}">+DET</button>
-                    <button class="btn-icon btn-subir-grupo" title="Subir" data-index="${index}">${ico.up}</button>
-                    <button class="btn-icon btn-descer-grupo" title="Descer" data-index="${index}">${ico.down}</button>
-                    <button class="btn-icon btn-editar-grupo" title="Editar" data-index="${index}">${ico.edit}</button>
-                    <button class="btn-icon red btn-remover-grupo" title="Remover" data-index="${index}">${ico.trash}</button>
-                    </div>
-                </div>
-                <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
-                    <div class="pl-4">
-                    <strong>RET</strong>: ${retsCount > 0 ? encodeHtml(grupo.rets.map(function(ret){ return ret.nome; }).join(', ')) : '<span class="text-muted">Nenhum RET</span>'}
-                    </div>
-                    <div class="text-md-end">
-                    <button class="btn-icon btn-subir-ret" title="Subir" data-id="${index}">${ico.up}</button>
-                    <button class="btn-icon btn-descer-ret" title="Descer" data-id="${index}">${ico.down}</button>
-                    <button class="btn-icon btn-editar-ret" title="Editar" data-id="${index}">${ico.edit}</button>
-                    <button class="btn-icon red btn-remover-ret" title="Remover" data-id="${index}">${ico.trash}</button>
-                    </div>
-                </div>
-                <div class="d-flex flex-column flex-md-row justify-content-between gap-3">
-                    <div class="pl-4"><strong>DET</strong>: ${detsCount > 0 ? encodeHtml(grupo.dets.map(function(det){ return det.nome + ' (' + det.retNome + ')'; }).join(', ')) : '<span class="text-muted">Nenhum DET</span>'}</div>
-                </div>
+                    ${renderRETs(grupo, index)}
                 </div>
             </div>`);
 
@@ -157,6 +139,29 @@ var componenteGrupamentosDados = function() {
             const index = $(this).data('index');
             removerGrupamentoDados(index);
         });
+    }
+
+    function renderRETs(grupo, group_index) {
+        var ret_contents = "";
+
+        for (var ret_index = 0; ret_index < grupo.rets.length; ret_index++) {
+            var ret = grupo.rets[ret_index]
+
+            ret_contents = ret_contents + 
+                `<div class="d-flex flex-column flex-md-row justify-content-between gap-3">
+                    <div class="pl-4">
+                        <strong>RET</strong>: ${encodeHtml(ret.nome)}
+                    </div>
+                    <div class="text-md-end">
+                        <button class="btn-icon btn-subir-ret" title="Subir" data-index="${group_index}" data-ret-index="${ret_index}">${ico.up}</button>
+                        <button class="btn-icon btn-descer-ret" title="Descer" data-index="${group_index}" data-ret-index="${ret_index}">${ico.down}</button>
+                        <button class="btn-icon btn-editar-ret" title="Editar" data-index="${group_index}" data-ret-index="${ret_index}">${ico.edit}</button>
+                        <button class="btn-icon btn-remover-ret" title="Remover" data-index="${group_index}" data-ret-index="${ret_index}">${ico.trash}</button>
+                    </div>
+                </div>`
+        }
+
+        return ret_contents
     }
 
     /* Abre a modal para criar um novo grupamento de dados */
@@ -227,7 +232,7 @@ var componenteGrupamentosDados = function() {
             grupo.nome = nome;
             grupo.tipo = tipo;
         } else {
-            const grupo = { nome: nome, tipo: tipo, rets: [nome], dets: [] };
+            const grupo = { nome: nome, tipo: tipo, rets: [{ nome: nome, dets: [] }] };
             grupamentos.push(grupo);
         }
 
